@@ -1,6 +1,6 @@
 import express from 'express';
 import { Router } from 'express';
-import userRouter from './routes/users.js';
+import userRouter from './routes/userRouter.js';
 import productRouter from './routes/productRouter.js';
 
 const app = express();
