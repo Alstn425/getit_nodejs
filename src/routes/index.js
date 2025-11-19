@@ -1,9 +1,9 @@
-import express, { Router } from 'express';
-import userRouter from './userRouter.js';
+import { Router } from 'express';
+import itemRouter from './itemRouter.js';
 
 const router = Router();
 
-router.use('/users', userRouter);
-// 다른 라우터를 추가할 수 있습니다.
+router.use('/api/items', itemRouter);
 
 export default router;
+

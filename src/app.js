@@ -1,19 +1,24 @@
 import express from 'express';
-import userRouter from './routes/userRouter.js';
-import productRouter from './routes/productRouter.js';
-import orderRouter from './routes/orderRouter.js';
+import cors from 'cors';
 import dotenv from 'dotenv';
+import router from './routes/index.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
+app.use(cors());
 app.use(express.json());
 
-app.use('/users', userRouter);
-app.use('/products', productRouter);
-app.use('/orders', orderRouter);
+app.use('/', router);
+
+app.get('/health', (req, res) => res.json({ ok: true, env: NODE_ENV }));
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`API server running http://localhost:${PORT}`);
 });
